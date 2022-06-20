@@ -5,14 +5,15 @@ import 'package:base_bloc_3/features/core/domain/use_case/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: CoreUseCase)
-class CoreUseCaseImpl implements CoreUseCase {
-  CoreUseCaseImpl(this._coreRepo);
+@Injectable(as: ExampleUseCase)
+class ExampleUseCaseImpl implements ExampleUseCase {
+  ExampleUseCaseImpl(this._coreRepo);
 
-  final CoreRepo _coreRepo;
+  final ExampleRepo _coreRepo;
 
   @override
-  Future<Either<BaseError, BaseModel>> getData(String param) {
-    return _coreRepo.getData(param);
+  Future<Either<BaseError, BaseModel>> getData(
+      {required double lat, required double lon}) {
+    return _coreRepo.getData(lat: lat, lon: lon);
   }
 }

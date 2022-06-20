@@ -7,16 +7,18 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: CoreRepo)
-class CoreRepoImpl implements CoreRepo {
-  CoreRepoImpl(this._remoteDataSource);
+@Injectable(as: ExampleRepo)
+class ExampleRepoImpl implements ExampleRepo {
+  ExampleRepoImpl(this._remoteDataSource);
 
   final DataSource _remoteDataSource;
 
   @override
-  Future<Either<BaseError, BaseModel>> getData(String param) async {
+  Future<Either<BaseError, BaseModel>> getData(
+      {required double lat, required double lon}) async {
     try {
-      final BaseModel result = await _remoteDataSource.getData(param);
+      final BaseModel result =
+          await _remoteDataSource.getData(lat: lat, lon: lon);
       return right(result);
     } on DioError catch (exception) {
       return left(exception.baseError);

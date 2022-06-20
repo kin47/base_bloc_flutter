@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
+@singleton
 class LogUtils {
   /// methodCount:2 , // number of method calls to be displayed
   /// errorMethodCount: 8, // number of method calls if stacktrace is provided

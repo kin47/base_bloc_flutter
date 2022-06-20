@@ -3,7 +3,11 @@ import 'package:dio/dio.dart';
 class DioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    //TODO
+    final Map<String, dynamic> header = {};
+    header["X-RapidAPI-Key"] =
+        "5b09d713aemsh814d445b745b81cp1d4172jsne690ea8c40bd";
+    header["X-RapidAPI-Host"] = "weatherbit-v1-mashape.p.rapidapi.com";
+    options.headers.addAll(header);
     super.onRequest(options, handler);
   }
 
