@@ -1,6 +1,6 @@
 import 'package:base_bloc_3/base/bloc/index.dart';
-import 'package:base_bloc_3/features/core/data/model/base_data.dart';
-import 'package:base_bloc_3/features/core/domain/use_case/use_case.dart';
+import 'package:base_bloc_3/features/example/data/model/base_data.dart';
+import 'package:base_bloc_3/features/example/domain/use_case/use_case.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +40,5 @@ class ExampleBloc extends BaseBloc<ExampleEvent, ExampleState> {
 
   Future onShowMessage(Emitter<ExampleState> emit) async {
     emit(state.copyWith(message: "Error"));
-    print("log");
   }
 }

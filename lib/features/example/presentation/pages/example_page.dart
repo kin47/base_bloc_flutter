@@ -1,5 +1,5 @@
 import 'package:base_bloc_3/base/base_widget.dart';
-import 'package:base_bloc_3/base/widgets/base_scaffold.dart';
+import 'package:base_bloc_3/common/widgets/base_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/example_bloc.dart';

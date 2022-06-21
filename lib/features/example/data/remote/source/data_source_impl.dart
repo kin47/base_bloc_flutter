@@ -1,6 +1,6 @@
-import 'package:base_bloc_3/features/core/data/model/base_data.dart';
-import 'package:base_bloc_3/features/core/data/remote/service/example_service.dart';
-import 'package:base_bloc_3/features/core/data/remote/source/data_source.dart';
+import 'package:base_bloc_3/features/example/data/model/base_data.dart';
+import 'package:base_bloc_3/features/example/data/remote/service/example_service.dart';
+import 'package:base_bloc_3/features/example/data/remote/source/data_source.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: DataSource)

@@ -3,8 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../constants/constants.dart';
+import 'error.dart';
 
-extension ErrorMessage on DioError {
+extension DioErrorMessage on DioError {
   BaseError get baseError {
     BaseError errorMessage = const BaseError.httpUnknownError("unknown");
     switch (type) {
@@ -42,5 +43,16 @@ extension ErrorMessage on DioError {
         break;
     }
     return errorMessage;
+  }
+}
+
+extension BaseErrorMessage on BaseError {
+  String get getError {
+    if (this is HttpInternalServerError) {
+      return "HttpInternalServerError";
+    } else if (this is HttpUnAuthorizedError) {
+      return "HttpUnAuthorizedError";
+    }
+    return "HttpUnknownError";
   }
 }

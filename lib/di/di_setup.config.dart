@@ -11,14 +11,14 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../common/local_data/shared_pref.dart' as _i6;
 import '../common/logger/logger.dart' as _i7;
 import '../common/utils/snack_bar/snack_bar_helper.dart' as _i8;
-import '../features/core/data/remote/service/example_service.dart' as _i5;
-import '../features/core/data/remote/source/data_source.dart' as _i9;
-import '../features/core/data/remote/source/data_source_impl.dart' as _i10;
-import '../features/core/data/repository/core_repository_impl.dart' as _i12;
-import '../features/core/domain/repository/core_repository.dart' as _i11;
-import '../features/core/domain/use_case/use_case.dart' as _i13;
-import '../features/core/domain/use_case/use_case_impl.dart' as _i14;
-import '../features/core/presentation/bloc/example_bloc.dart' as _i15;
+import '../features/example/data/remote/service/example_service.dart' as _i5;
+import '../features/example/data/remote/source/data_source.dart' as _i9;
+import '../features/example/data/remote/source/data_source_impl.dart' as _i10;
+import '../features/example/data/repository/core_repository_impl.dart' as _i12;
+import '../features/example/domain/repository/core_repository.dart' as _i11;
+import '../features/example/domain/use_case/use_case.dart' as _i13;
+import '../features/example/domain/use_case/use_case_impl.dart' as _i14;
+import '../features/example/presentation/bloc/example_bloc.dart' as _i15;
 import '../features/routes/app_pages.dart' as _i3;
 import 'app_module.dart' as _i16; // ignore_for_file: unnecessary_lambdas
 
