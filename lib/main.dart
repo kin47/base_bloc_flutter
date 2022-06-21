@@ -1,8 +1,11 @@
 import 'package:base_bloc_3/common/constants.dart';
+import 'package:base_bloc_3/common/notification/local_notification_helper.dart';
+import 'package:base_bloc_3/common/notification/push_notification_helper.dart';
 import 'package:base_bloc_3/di/di_setup.dart';
 import 'package:base_bloc_3/features/routes/app_pages.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +16,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   configureDependencies();
+  await Firebase.initializeApp();
+  await getIt<PushNotificationHelper>().initialize();
+  await getIt<LocalNotificationHelper>().init();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
