@@ -1,9 +1,11 @@
-import 'package:base_bloc_3/features/example/data/model/base_data.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../base/network/errors/error.dart';
+import '../../data/model/index.dart';
 
 abstract class ExampleUseCase {
-  Future<Either<BaseError, BaseModel>> getData(
-      {required double lat, required double lon});
+  Future<Either<BaseError, List<Player>>> getData({
+    required int offset,
+    required int limit,
+  });
 }

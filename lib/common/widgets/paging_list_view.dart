@@ -15,8 +15,8 @@ class CustomSliverListView<T> extends StatelessWidget {
   final VoidCallback? onRefresh;
   final double? itemExtent;
   final Color? loadingBackgroundColor;
-  const CustomSliverListView(
-    Key? key, {
+  const CustomSliverListView({
+    Key? key,
     required this.controller,
     required this.builder,
     this.emptyWidget,
@@ -71,8 +71,8 @@ class CustomListView<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final ScrollController? scrollController;
   final EdgeInsets? padding;
-  const CustomListView(
-    Key? key, {
+  const CustomListView({
+    Key? key,
     required this.controller,
     required this.builder,
     this.emptyWidget = const SizedBox.shrink(),
@@ -127,8 +127,8 @@ class CustomSliverListViewSeparated<T> extends StatelessWidget {
   final VoidCallback? onRefresh;
   final double? itemExtent;
   final Color? loadingBackgroundColor;
-  const CustomSliverListViewSeparated(
-    Key? key, {
+  const CustomSliverListViewSeparated({
+    Key? key,
     required this.controller,
     required this.builder,
     this.emptyWidget,
@@ -187,8 +187,8 @@ class CustomListViewSeparated<T> extends StatelessWidget {
   final ScrollController? scrollController;
   final EdgeInsets? padding;
 
-  const CustomListViewSeparated(
-    Key? key, {
+  const CustomListViewSeparated({
+    Key? key,
     required this.controller,
     required this.builder,
     required this.separatorBuilder,
@@ -245,8 +245,8 @@ class CustomSliverGridView<T> extends StatelessWidget {
   final double? itemExtent;
   final Color? loadingBackgroundColor;
   final SliverGridDelegate delegate;
-  const CustomSliverGridView(
-    Key? key, {
+  const CustomSliverGridView({
+    Key? key,
     required this.controller,
     required this.builder,
     required this.delegate,
@@ -302,8 +302,8 @@ class CustomGridView<T> extends StatelessWidget {
   final double? itemExtent;
   final Color? loadingBackgroundColor;
   final SliverGridDelegate delegate;
-  const CustomGridView(
-    Key? key, {
+  const CustomGridView({
+    Key? key,
     required this.controller,
     required this.builder,
     required this.delegate,

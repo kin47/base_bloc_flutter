@@ -3,10 +3,12 @@ part of 'example_bloc.dart';
 @CopyWith()
 class ExampleState extends BaseBlocState {
   final Option<String>? attribute;
+  final List<Player> players;
 
   const ExampleState({
     required super.status,
     super.message,
+    this.players = const [],
     this.attribute,
   });
 
@@ -15,5 +17,5 @@ class ExampleState extends BaseBlocState {
   }
 
   @override
-  List get props => [status, message];
+  List get props => [status, players, message, attribute];
 }

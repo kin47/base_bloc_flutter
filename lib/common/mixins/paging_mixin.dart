@@ -7,12 +7,18 @@ class BaseCommonMethodMixin {
   void pagingControllerOnLoad<T>(
     int page,
     PagingController<int, T> pagingController,
-    Either<BaseError, List<T>> either, [
+    Either<BaseError, List<T>> either, {
     int limit = 10,
     String? errorMessage,
-  ]) {
+    Function(String)? onError,
+    Function()? onSuccess,
+  }) {
     either.fold(
-      (l) => pagingController.error = errorMessage ?? l.getError,
+      (l) {
+        final error = errorMessage ?? l.getError;
+        pagingController.error = error;
+        onError?.call(error);
+      },
       (r) {
         final isLastPage = r.length < limit;
         if (isLastPage) {
@@ -21,6 +27,7 @@ class BaseCommonMethodMixin {
           final nextPageKey = page + r.length;
           pagingController.appendPage(r, nextPageKey);
         }
+        onSuccess?.call();
       },
     );
   }

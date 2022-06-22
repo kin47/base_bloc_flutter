@@ -1,3 +1,4 @@
+import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/common/widgets/buttons/custom_text_button.dart';
 import 'package:base_bloc_3/common/widgets/custom_checkbox_widget.dart';
 import 'package:flutter/material.dart';

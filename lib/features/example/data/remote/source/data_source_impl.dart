@@ -1,7 +1,9 @@
-import 'package:base_bloc_3/features/example/data/model/base_data.dart';
 import 'package:base_bloc_3/features/example/data/remote/service/example_service.dart';
 import 'package:base_bloc_3/features/example/data/remote/source/data_source.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../../base/network/models/base_data.dart';
+import '../../model/index.dart';
 
 @Injectable(as: DataSource)
 class DataSourceImpl implements DataSource {
@@ -10,7 +12,10 @@ class DataSourceImpl implements DataSource {
   final ExampleService _service;
 
   @override
-  Future<BaseModel> getData({required double lat, required double lon}) {
-    return _service.getData(lat: lat, lon: lon);
+  Future<BaseListData<Player>> getData({
+    required int offset,
+    required int limit,
+  }) {
+    return _service.getData(offset: offset, limit: limit);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AppBarWidget extends StatelessWidget {
+class BaseAppBar extends StatelessWidget {
   final String? title;
   final String? icon;
   final bool? hasBack;
@@ -23,7 +23,7 @@ class AppBarWidget extends StatelessWidget {
   final Color? textColor;
   final dynamic result;
 
-  const AppBarWidget({
+  const BaseAppBar({
     Key? key,
     this.backgroundColor,
     this.titleSpacing,

@@ -5,8 +5,8 @@ class DioInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final Map<String, dynamic> header = {};
     header["X-RapidAPI-Key"] =
-        "5b09d713aemsh814d445b745b81cp1d4172jsne690ea8c40bd";
-    header["X-RapidAPI-Host"] = "weatherbit-v1-mashape.p.rapidapi.com";
+        "78d211523bmsh34d9b38775ea89bp1f0570jsn3659220c752a";
+    header["X-RapidAPI-Host"] = "free-nba.p.rapidapi.com";
     options.headers.addAll(header);
     super.onRequest(options, handler);
   }

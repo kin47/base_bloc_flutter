@@ -3,5 +3,6 @@ enum BaseStateStatus {
   idle,
   loading,
   success,
+  loadMoreSuccess,
   failed,
 }
