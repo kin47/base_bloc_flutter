@@ -12,7 +12,7 @@ abstract class ExampleService {
   @factoryMethod
   factory ExampleService(Dio dio) = _ExampleService;
 
-  @GET('https://weatherbit-v1-mashape.p.rapidapi.com/current')
+  @GET("weather")
   Future<BaseModel> getData({
     @Query('lat') required double lat,
     @Query('lon') required double lon,
