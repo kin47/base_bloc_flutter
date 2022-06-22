@@ -31,6 +31,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -66,6 +67,26 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            dimension "app"
+            resValue "string","app_name","Base Bloc Flutter 3 Dev"
+            applicationId "com.example.base_bloc_3.dev"
+        }
+        staging {
+            dimension "app"
+            resValue "string","app_name","Base Bloc Flutter 3 Stagin"
+            applicationId "com.example.base_bloc_3.staging"
+        }
+        production {
+            dimension "app"
+            resValue "string", "app_name", "Base Bloc Flutter 3"
+        }
+
     }
 }
 

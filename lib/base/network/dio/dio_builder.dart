@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../../common/config/index.dart';
 import '../../../common/logger/index.dart';
@@ -33,6 +34,6 @@ class DioBuilder {
   }
 
   String getUrl() {
-    return 'DefaultConfig.baseURLTCG';
+    return dotenv.get('BASE_URL');
   }
 }
