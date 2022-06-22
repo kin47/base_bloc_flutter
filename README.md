@@ -161,3 +161,118 @@ class _ExamplePageState
 
 
 
+## Flavor
+Using
+- [Flutter dotenv](https://pub.dev/packages/flutter_dotenv)
+  Config env in
+```
+│
+└───assets
+│   └─── evn
+```
+In Android
+----------- 
+Add google_services.json to
+```
+│
+└───android
+│   └─── app
+│            └─── dev 
+│            └─── staging
+│            └─── production
+```
+Change applicationId & App name in android/app/build.gradle
+```
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            dimension "app"
+            resValue "string","app_name","Base Bloc Flutter 3 Dev"
+            applicationId "com.example.base_bloc_3.dev"
+        }
+        staging {
+            dimension "app"
+            resValue "string","app_name","Base Bloc Flutter 3 Stagin"
+            applicationId "com.example.base_bloc_3.staging"
+        }
+        production {
+            dimension "app"
+            resValue "string", "app_name", "Base Bloc Flutter 3"
+        }
+
+    }
+```
+
+```
+    applicationId "com.example.base_bloc_3"
+```
+In IOS
+------
+Add google google_services.plist to
+```
+│
+└───Runner
+│   └─── config
+│            └─── dev 
+│            └─── staging
+│            └─── production
+```
+Change Product Bundle Identifier in Runner/Targets/Runner/Build Setting/Product Bundle Identifier
+Change App Display Name in Runner/Targets/Runner/Build Setting/User-Defined/APP_DISPLAY_NAME
+
+## Push Notification
+Using
+- [Firebase Messing](https://pub.dev/packages/firebase_messaging)
+
+Initial Firebase Message
+```dart
+    Future<void> initialize({Function(String)? handleNotificationOnTap,})
+```
+
+Listen onMessage
+```dart
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        
+    });
+```
+Listen onBackgroundMessage
+```dart
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+```
+Listen onMessage when App opened & handle onTap notification
+```dart
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+          
+    });
+```
+
+## Local Notification
+Using
+- [Flutter Local Notification](https://pub.dev/packages/flutter_local_notifications)
+
+
+Init local Notification
+```dart
+    Future<void> init()
+```
+
+
+Show Notification
+```dart
+    Future<void> showNotification({
+    required String title,
+    required String body,
+    String channelId = NotificationConfig.highChannelId,
+    String? payload,
+    Importance? importance,
+    Priority? priority,
+  }){}
+```
+
+Hanlde onTap Notification
+```dart
+    Future<dynamic> selectNotification(String? payload) async {
+    }
+```
+
