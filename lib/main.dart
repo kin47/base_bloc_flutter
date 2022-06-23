@@ -57,8 +57,6 @@ Future<void> main() async {
   );
 }
 
-//todo: Navigator
-//todo: base bloc, base widget, etc
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);

@@ -1,6 +1,8 @@
 import 'package:base_bloc_3/base/base_widget.dart';
+import 'package:base_bloc_3/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/index.dart';
 import '../../data/model/index.dart';
@@ -26,7 +28,6 @@ class _ExamplePageState
         ),
       ),
     );
-    showModalBottomSheet(context: context, builder: (c) => Container());
   }
 
   @override
@@ -61,7 +62,16 @@ class HeaderWidget extends StatelessWidget {
       decoration:
           BoxDecoration(color: Colors.greenAccent, border: Border.all()),
       padding: const EdgeInsets.all(16),
-      child: Text("Count: $total"),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Assets.images.icProfile.svg(width: 16.w, height: 16.h),
+          SizedBox(
+            width: 8.w,
+          ),
+          Text("Count: $total"),
+        ],
+      ),
     );
   }
 }
