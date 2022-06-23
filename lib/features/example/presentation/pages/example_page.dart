@@ -16,7 +16,8 @@ class ExamplePage extends StatefulWidget {
 }
 
 class _ExamplePageState
-    extends BaseState<ExamplePage, ExampleEvent, ExampleState, ExampleBloc> {
+    extends BaseState<ExamplePage, ExampleEvent, ExampleState, ExampleBloc>
+    with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -28,6 +29,17 @@ class _ExamplePageState
         ),
       ),
     );
+  }
+
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 2),
+    vsync: this,
+  )..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
