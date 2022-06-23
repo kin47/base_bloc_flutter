@@ -164,7 +164,9 @@ class _ExamplePageState
 ## Flavor
 Using
 - [Flutter dotenv](https://pub.dev/packages/flutter_dotenv)
-  Config env in
+  
+
+Config env in
 ```
 │
 └───assets
