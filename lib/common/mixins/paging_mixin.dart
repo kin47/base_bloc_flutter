@@ -24,8 +24,7 @@ class BaseCommonMethodMixin {
         if (isLastPage) {
           pagingController.appendLastPage(r);
         } else {
-          final nextPageKey = page + r.length;
-          pagingController.appendPage(r, nextPageKey);
+          pagingController.appendPage(r, page++);
         }
         onSuccess?.call();
       },
