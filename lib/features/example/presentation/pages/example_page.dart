@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/index.dart';
-import '../../data/model/index.dart';
+import '../../domain/entity/player_entity.dart';
 import '../bloc/example_bloc.dart';
 
 class ExamplePage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _ExamplePageState
         children: [
           const HeaderWidget(),
           Expanded(
-            child: CustomListViewSeparated<Player>(
+            child: CustomListViewSeparated<PlayerEntity>(
               separatorBuilder: (c, i) => const Divider(),
               controller: bloc.pagingController,
               builder: (c, item, i) => PlayerItem(
@@ -89,7 +89,7 @@ class HeaderWidget extends StatelessWidget {
 }
 
 class PlayerItem extends StatelessWidget {
-  final Player data;
+  final PlayerEntity data;
   const PlayerItem({Key? key, required this.data}) : super(key: key);
 
   @override
