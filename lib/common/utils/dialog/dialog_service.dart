@@ -1,213 +1,246 @@
 import 'package:base_bloc_3/common/index.dart';
-import 'package:base_bloc_3/common/widgets/buttons/custom_text_button.dart';
-import 'package:base_bloc_3/common/widgets/custom_checkbox_widget.dart';
+import 'package:base_bloc_3/common/widgets/buttons/app_button.dart';
+import 'package:base_bloc_3/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DialogService {
-  static Future<dynamic> showActionDialog(BuildContext context,
-      {String? leftButtonText,
-      String? rightButtonText,
-      VoidCallback? onPressedLeftButton,
-      VoidCallback? onPressedRightButton,
-      String? title,
-      Widget? decorationWidget,
-      String? description,
-      TextStyle? titleTextStyle,
-      TextStyle? descriptionTextStyle,
-      TextStyle? leftButtonTextStyle,
-      TextStyle? rightButtonTextStyle,
-      Color? leftButtonColor,
-      Color? rightButtonColor,
-      Color? leftButtonTextColor,
-      Color? rightButtonTextColor,
-      Function(bool value)? valueCheckbox}) {
-    // show the dialog
+  static bool isShowLoading = false;
+  static bool isShowActionDialog = false;
+
+  static Future<dynamic> showActionDialog(
+      BuildContext context, {
+        String? leftButtonText,
+        String? rightButtonText,
+        VoidCallback? onPressedLeftButton,
+        VoidCallback? onPressedRightButton,
+        String? description,
+        TextStyle? descriptionTextStyle,
+        TextStyle? leftButtonTextStyle,
+        TextStyle? rightButtonTextStyle,
+        bool callBackAfterClose = false,
+        bool barrierDismissible = true,
+        bool isOnlyDialog = false,
+      }) {
+    if (isShowActionDialog && isOnlyDialog) return Future.value();
+    isShowActionDialog = true;
     return showDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.white,
-            child: _DialogWidget(
-              valueCheckbox: valueCheckbox,
-              leftButtonTextStyle: leftButtonTextStyle,
-              leftButtonText: leftButtonText,
-              leftButtonColor: leftButtonColor,
-              leftButtonTextColor: leftButtonTextColor,
-              onPressedLeftButton: onPressedLeftButton,
-              title: title,
-              description: description,
-              decorationWidget: decorationWidget,
-              descriptionTextStyle: descriptionTextStyle,
-              rightButtonText: rightButtonText,
-              rightButtonTextColor: rightButtonTextColor,
-              onPressedRightButton: onPressedRightButton,
-              rightButtonColor: rightButtonColor,
-              rightButtonTextStyle: rightButtonTextStyle,
-            ));
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          child: DialogWidget(
+            leftButtonTextStyle: leftButtonTextStyle,
+            leftButtonText: leftButtonText,
+            onPressedLeftButton: onPressedLeftButton,
+            description: description,
+            descriptionTextStyle: descriptionTextStyle,
+            rightButtonText: rightButtonText,
+            onPressedRightButton: onPressedRightButton,
+            rightButtonTextStyle: rightButtonTextStyle,
+            callBackAfterClose: callBackAfterClose,
+          ),
+        );
       },
+    ).whenComplete(
+          () => isShowActionDialog = false,
+    );
+  }
+
+  static Future<dynamic> showLoading(BuildContext context) {
+    if (isShowLoading) {
+      return Future.value();
+    }
+    isShowLoading = true;
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: const LoadingWidget(),
+        );
+      },
+    );
+  }
+
+  static hideDialog(BuildContext context) {
+    if (!isShowLoading) {
+      return Future.value();
+    }
+    isShowLoading = false;
+    Navigator.of(context).pop();
+  }
+
+  static Future<dynamic> showCustomDialog(
+      BuildContext context,
+      Widget dialogUi, {
+        bool isOnlyDialog = false,
+      }) {
+    if (isShowActionDialog && isOnlyDialog) return Future.value();
+    isShowActionDialog = true;
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return dialogUi;
+      },
+    ).whenComplete(
+          () => isShowActionDialog = false,
     );
   }
 }
 
-class _DialogWidget extends StatefulWidget {
+class LoadingWidget extends StatefulWidget {
+  const LoadingWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  LoadingWidgetState createState() => LoadingWidgetState();
+}
+
+class LoadingWidgetState extends State<LoadingWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    _controller.repeat();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: Tween(begin: 1.0, end: 0.0).animate(_controller),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        color: Colors.transparent,
+        child: SizedBox(
+          width: 54.w,
+          height: 54.h,
+          child: Assets.images.loading.image(),
+        ),
+      ),
+    );
+  }
+}
+
+class DialogWidget extends StatefulWidget {
   final String? leftButtonText;
   final String? rightButtonText;
   final VoidCallback? onPressedLeftButton;
   final VoidCallback? onPressedRightButton;
-  final String? title;
-  final Widget? decorationWidget;
   final String? description;
-  final Widget? descriptionWidget;
-  final TextStyle? titleTextStyle;
   final TextStyle? descriptionTextStyle;
   final TextStyle? leftButtonTextStyle;
   final TextStyle? rightButtonTextStyle;
-  final Color? leftButtonColor;
-  final Color? rightButtonColor;
-  final Color? leftButtonTextColor;
-  final Color? rightButtonTextColor;
-  final Function(bool value)? valueCheckbox;
+  final bool callBackAfterClose;
 
-  const _DialogWidget({
+  const DialogWidget({
     Key? key,
     this.leftButtonText,
     this.rightButtonText,
     this.onPressedLeftButton,
-    this.descriptionWidget,
     this.onPressedRightButton,
-    this.title,
-    this.decorationWidget,
     this.description,
-    this.titleTextStyle,
     this.descriptionTextStyle,
     this.leftButtonTextStyle,
     this.rightButtonTextStyle,
-    this.leftButtonColor,
-    this.rightButtonColor,
-    this.leftButtonTextColor,
-    this.rightButtonTextColor,
-    this.valueCheckbox,
+    this.callBackAfterClose = false,
   }) : super(key: key);
 
   @override
-  _DialogWidgetState createState() => _DialogWidgetState();
+  DialogWidgetState createState() => DialogWidgetState();
 }
 
-class _DialogWidgetState extends State<_DialogWidget> {
-  bool _selected = false;
-
+class DialogWidgetState extends State<DialogWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            widget.title ?? "Thông báo",
-            // style: AppTextStyles.regularW600(context,
-            //     size: 16, color: AppColors.primaryLink), todo
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          const Divider(
-            color: Color(0xFFD3DCE6),
-            thickness: 1,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          widget.decorationWidget != null
-              ? Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  child: widget.decorationWidget,
-                )
-              : const SizedBox.shrink(),
-          widget.descriptionWidget ?? const SizedBox.shrink(),
           widget.description != null
               ? Text(
-                  widget.description ?? "",
-                  textAlign: TextAlign.center,
-                  // style: widget.descriptionTextStyle ??
-                  //     AppTextStyles.regularW400(context, size: 16), todo
-                )
+            widget.description ?? "",
+            textAlign: TextAlign.center,
+            style: widget.descriptionTextStyle ??
+                AppStyles.h4BodyText14ptRegular,
+          )
               : const SizedBox.shrink(),
           const SizedBox(
-            height: 16,
+            height: 20,
           ),
-          widget.valueCheckbox == null
-              ? const SizedBox.shrink()
-              : Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomCheckBoxWidget(
-                        onChange: () {
-                          setState(() {
-                            _selected = !_selected;
-                          });
-                          widget.valueCheckbox!(_selected);
-                        },
-                        value: _selected,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Chặn mọi người thêm tôi vào nhóm",
-                          // style: widget.descriptionTextStyle ??
-                          //     AppTextStyles.regularW500(context, size: 16),
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  child: AppButton(
+                    isOutlined: true,
+                    verticalPadding: 0,
+                    title: widget.leftButtonText ?? "OK",
+                    onPressed: () {
+                      if (widget.callBackAfterClose) {
+                        Navigator.of(context).pop();
+                        widget.onPressedLeftButton?.call();
+                      } else {
+                        widget.onPressedLeftButton?.call();
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    borderRadius: 2,
+                    textColor: AppColors.deepDark,
+                    textStyle: widget.leftButtonTextStyle ??
+                        AppStyles.button15ptMedium,
                   ),
                 ),
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextButton(
-                  title: widget.leftButtonText ?? "OK",
-                  onPressed: widget.onPressedLeftButton,
-                  isDisable: false,
-                  // backgroundColor:
-                  // widget.leftButtonColor ?? AppColors.secondary1,
-                  // textStyle: AppTextStyles.regularW400(context,
-                  //     size: 14,
-                  //     color: widget.leftButtonTextColor ?? AppColors.white),
-                ),
-              ),
-              widget.rightButtonText != null
-                  ? const SizedBox(
-                      width: 16,
-                    )
-                  : const SizedBox.shrink(),
-              widget.rightButtonText != null
-                  ? Expanded(
-                      child: CustomTextButton(
-                        title: widget.rightButtonText ?? "",
-                        onPressed: widget.onPressedRightButton,
-                        isDisable: false,
-                        // backgroundColor:
-                        // widget.rightButtonColor ?? AppColors.blue10,
-                        // textStyle: AppTextStyles.regularW400(context,
-                        //     size: 14,
-                        //     color: widget.rightButtonTextColor ??
-                        //         AppColors.primaryDefault),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-            ],
+                widget.rightButtonText != null
+                    ? const SizedBox(
+                  width: 16,
+                )
+                    : const SizedBox.shrink(),
+                widget.rightButtonText != null
+                    ? Expanded(
+                  child: AppButton(
+                    verticalPadding: 0,
+                    title: widget.rightButtonText ?? "",
+                    onPressed: () {
+                      widget.onPressedRightButton?.call();
+                      Navigator.pop(context);
+                    },
+                    borderRadius: 2,
+                    textStyle: widget.leftButtonTextStyle ??
+                        AppStyles.button15ptMedium,
+                  ),
+                )
+                    : const SizedBox.shrink(),
+              ],
+            ),
           )
         ],
       ),

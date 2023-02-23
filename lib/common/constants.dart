@@ -16,4 +16,5 @@ class NotificationConfig {
 class Config {
   static const memCacheHeight = 150;
   static const memCacheWidth = 150;
+  static const defaultDurationShowToast = 2; //seconds
 }
