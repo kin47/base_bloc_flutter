@@ -1,9 +1,10 @@
-import 'package:base_bloc_3/features/example/data/remote/service/example_service.dart';
-import 'package:base_bloc_3/features/example/data/remote/source/data_source.dart';
+
+import 'package:base_bloc_3/features/example/data/datasource/data_source.dart';
+import 'package:base_bloc_3/features/example/data/datasource/remote/service/example_service.dart';
+import 'package:base_bloc_3/features/example/data/model/player/player.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../base/network/models/base_data.dart';
-import '../../model/index.dart';
 
 @Injectable(as: DataSource)
 class DataSourceImpl implements DataSource {

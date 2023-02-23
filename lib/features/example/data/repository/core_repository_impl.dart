@@ -1,6 +1,6 @@
 import 'package:base_bloc_3/base/network/errors/error.dart';
 import 'package:base_bloc_3/base/network/errors/extension.dart';
-import 'package:base_bloc_3/features/example/data/remote/source/data_source.dart';
+import 'package:base_bloc_3/features/example/data/datasource/data_source.dart';
 import 'package:base_bloc_3/features/example/domain/repository/core_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';

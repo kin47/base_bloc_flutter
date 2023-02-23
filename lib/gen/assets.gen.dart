@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,6 +22,9 @@ class $AssetsEnvGen {
 
   /// File path: assets/env/.env_staging
   String get envStaging => 'assets/env/.env_staging';
+
+  /// List of all assets
+  List<String> get values => [envDev, envProduction, envStaging];
 }
 
 class $AssetsImagesGen {
@@ -30,6 +33,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_profile.svg
   SvgGenImage get icProfile =>
       const SvgGenImage('assets/images/ic_profile.svg');
+
+  /// File path: assets/images/loading.png
+  AssetGenImage get loading => const AssetGenImage('assets/images/loading.png');
+
+  /// List of all assets
+  List<dynamic> get values => [icProfile, loading];
 }
 
 class $AssetsTranslationsGen {
@@ -40,6 +49,9 @@ class $AssetsTranslationsGen {
 
   /// File path: assets/translations/vi-VN.json
   String get viVN => 'assets/translations/vi-VN.json';
+
+  /// List of all assets
+  List<String> get values => [enUS, viVN];
 }
 
 class Assets {
@@ -108,6 +120,8 @@ class AssetGenImage {
     );
   }
 
+  ImageProvider provider() => AssetImage(_assetName);
+
   String get path => _assetName;
 
   String get keyName => _assetName;
@@ -160,4 +174,6 @@ class SvgGenImage {
   }
 
   String get path => _assetName;
+
+  String get keyName => _assetName;
 }
