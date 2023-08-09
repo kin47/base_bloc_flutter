@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class BaseAppBar extends StatelessWidget {
   final String? title;
@@ -62,7 +62,7 @@ class BaseAppBar extends StatelessWidget {
                   if (onPressedLeading != null) {
                     onPressedLeading!();
                   } else {
-                    context.popRoute(result);
+                    context.pop(result);
                   }
                 },
                 child: const Icon(Icons.arrow_back_ios) //todo: default icon,

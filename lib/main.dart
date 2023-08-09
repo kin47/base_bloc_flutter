@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:base_bloc_3/common/constants.dart';
 import 'package:base_bloc_3/common/notification/local_notification_helper.dart';
 import 'package:base_bloc_3/common/notification/push_notification_helper.dart';
 import 'package:base_bloc_3/di/di_setup.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -40,28 +38,20 @@ Future<void> main() async {
   await getIt<PushNotificationHelper>().initialize();
   await getIt<LocalNotificationHelper>().init();
   runApp(
-    DevicePreview(
-      enabled: false, // !kReleaseMode,
-      builder: (context) {
-        return EasyLocalization(
-          supportedLocales: const [
-            LocalizationConstants.enUSLocale,
-            LocalizationConstants.viLocale
-          ],
-          path: LocalizationConstants.path,
-          fallbackLocale: LocalizationConstants.enUSLocale,
-          child: MyApp(),
-        );
-      },
+    EasyLocalization(
+      supportedLocales: const [
+        LocalizationConstants.enUSLocale,
+        LocalizationConstants.viLocale
+      ],
+      path: LocalizationConstants.path,
+      fallbackLocale: LocalizationConstants.enUSLocale,
+      child: const MyApp(),
     ),
   );
 }
 
-
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  final _appRoute = getIt<AppPages>();
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +70,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          routerDelegate: _appRoute.delegate(),
-          routeInformationParser: _appRoute.defaultRouteParser(),
+          routerConfig: getIt<AppPages>().router,
         );
       },
     );

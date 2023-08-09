@@ -38,7 +38,7 @@ class SnackBarHelper {
     }
 
     showTopSnackBar(
-      context,
+      Overlay.of(context),
       CustomSnackBar.info(
         message: message,
         iconRotationAngle: 0,

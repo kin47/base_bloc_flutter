@@ -5,27 +5,27 @@ import 'package:easy_localization/easy_localization.dart';
 import '../constants/constants.dart';
 import 'error.dart';
 
-extension DioErrorMessage on DioError {
+extension DioErrorMessage on DioException {
   BaseError get baseError {
     BaseError errorMessage = const BaseError.httpUnknownError("unknown");
     switch (type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         errorMessage = BaseError.httpUnknownError("dio_cancel_request".tr());
         break;
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         errorMessage = BaseError.httpUnknownError("dio_cancel_request".tr());
         break;
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
         errorMessage = BaseError.httpUnknownError("dio_cancel_request".tr());
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         errorMessage = BaseError.httpUnknownError("dio_cancel_request".tr());
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         errorMessage = BaseError.httpUnknownError("dio_cancel_request".tr());
         break;
-      case DioErrorType.response:
-        final code = error.response?.statusCode;
+      case DioExceptionType.badResponse:
+        final code = response?.statusCode;
 
         //handle refresh Token
         // if (error.type == StatusCode.refreshToken){

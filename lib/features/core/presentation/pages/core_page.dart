@@ -2,9 +2,11 @@ import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../example/presentation/pages/example_page.dart';
 
 class CorePage extends StatefulWidget {
@@ -143,7 +145,10 @@ class DummyScreen extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       child: ListView.builder(
         itemBuilder: (c, i) => ListTile(
-          title: Text("index: $i"),
+          title: InkWell(
+            onTap: () => context.pushNamed(Routes.anotherPage),
+            child: Text("index: $i"),
+          ),
         ),
         itemCount: 1000,
       ),

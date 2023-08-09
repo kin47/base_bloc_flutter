@@ -1,8 +1,10 @@
+import 'package:base_bloc_3/common/utils/alice_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../../common/config/index.dart';
 import '../../../common/logger/index.dart';
+import '../../../di/di_setup.dart';
 import 'dio_interceptor.dart';
 
 class DioBuilder {
@@ -13,8 +15,8 @@ class DioBuilder {
       final BaseOptions options = BaseOptions(
         baseUrl: getUrl(),
         receiveDataWhenStatusError: true,
-        connectTimeout: ApiConfig.connectTimeout * 1000,
-        receiveTimeout: ApiConfig.receiveTimeout * 1000,
+        connectTimeout: const Duration(seconds: ApiConfig.connectTimeout),
+        receiveTimeout: const Duration(seconds: ApiConfig.receiveTimeout),
         headers: {"accept": "application/json"},
       );
       dio = Dio(options);
@@ -26,7 +28,8 @@ class DioBuilder {
             requestBody: true,
             responseHeader: true,
           ),
-          DioInterceptor()
+          DioInterceptor(),
+          getIt<AliceHelper>().alice.getDioInterceptor(),
         ],
       );
     }

@@ -14,24 +14,24 @@ class ErrorHandling implements Exception {
     _handleError(error);
   }
 
-  Future _handleError(DioError error) async {
+  Future _handleError(DioException error) async {
     switch (error.type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         errorMessage = "dio_cancel_request".tr();
         break;
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         errorMessage = "dio_cancel_request".tr();
         break;
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
         errorMessage = "dio_cancel_request".tr();
         break;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         errorMessage = "dio_cancel_request".tr();
         break;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         errorMessage = "dio_cancel_request".tr();
         break;
-      case DioErrorType.response:
+      case DioExceptionType.badResponse:
         final code = error.response?.statusCode;
 
         //handle refresh Token

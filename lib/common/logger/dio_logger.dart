@@ -16,7 +16,7 @@ class PrettyDioLogger extends Interceptor {
     this.responseBody = true,
     this.error = true,
     this.maxWidth = 90,
-    this.maxLines = 10,
+    this.maxLines = 20,
     this.compact = true,
     this.logPrint = printDebug,
   });
@@ -94,9 +94,9 @@ class PrettyDioLogger extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     if (error) {
-      if (err.type == DioErrorType.response) {
+      if (err.type == DioExceptionType.badResponse) {
         final uri = err.response?.requestOptions.uri;
         _printBoxed(
           header:

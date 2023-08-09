@@ -3,8 +3,10 @@ import 'package:base_bloc_3/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common/index.dart';
+import '../../../../routes/app_routes.dart';
 import '../../domain/entity/player_entity.dart';
 import '../bloc/example_bloc.dart';
 
@@ -94,13 +96,16 @@ class PlayerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Text(data.firstName ?? ""),
-          Text("Team: ${data.team}"),
-        ],
+    return InkWell(
+      onTap: () => context.pushNamed(Routes.anotherPage),
+      child: Container(
+        padding: EdgeInsets.all(16.h),
+        child: Column(
+          children: [
+            Text(data.firstName ?? ""),
+            Text("Team: ${data.team}"),
+          ],
+        ),
       ),
     );
   }
