@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'dart:typed_data';
-import 'package:event_bus/event_bus.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +9,7 @@ import '../index.dart';
 @singleton
 class LocalNotificationHelper {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   static int _notificationId = 1;
 
@@ -25,7 +24,7 @@ class LocalNotificationHelper {
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
     // /// get message when app kill
     // final NotificationAppLaunchDetails? notificationAppLaunchDetails =
@@ -45,8 +44,8 @@ class LocalNotificationHelper {
   }
 
   static void notificationTapBackground(
-      NotificationResponse notificationResponse,
-      ) {
+    NotificationResponse notificationResponse,
+  ) {
     if (notificationResponse.payload?.isNotEmpty ?? false) {
       /// todo handle event
     }
@@ -74,20 +73,20 @@ class LocalNotificationHelper {
     );
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(androidNotificationChannel);
   }
 
   Future<InitializationSettings> _getPlatformSettings() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings(
+        AndroidInitializationSettings(
       NotificationConfig.notificationIconPath,
     ); //TODO: set notification icon
     const DarwinInitializationSettings initializationSettingsIOS =
-    DarwinInitializationSettings(
-      // uncomment if want to support ios <10.
-      // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-    );
+        DarwinInitializationSettings(
+            // uncomment if want to support ios <10.
+            // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+            );
 
     return const InitializationSettings(
       android: initializationSettingsAndroid,
@@ -122,7 +121,7 @@ class LocalNotificationHelper {
       // ),
     );
     final DarwinNotificationDetails iOSPlatformChannelSpecifics =
-    DarwinNotificationDetails(
+        DarwinNotificationDetails(
       presentAlert: true,
       // Present an alert when the notification is displayed and the application is in the foreground (only from iOS 10 onwards)
       presentBadge: true,
@@ -130,7 +129,7 @@ class LocalNotificationHelper {
       presentSound: true,
       // Play a sound when the notification is displayed and the application is in the foreground (only from iOS 10 onwards)
       // sound:
-      //     notificationSoundPath, // Specifics the file pat  h to play (only from iOS 10 onwards)
+      //     notificationSoundPath, // Specifics the file path to play (only from iOS 10 onwards)
       badgeNumber: 1,
       // The application's icon badge number
       //attachments: List<IOSNotificationAttachment>?, (only from iOS 10 onwards)

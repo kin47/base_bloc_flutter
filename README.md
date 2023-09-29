@@ -191,12 +191,12 @@ Change applicationId & App name in android/app/build.gradle
         dev {
             dimension "app"
             resValue "string","app_name","Base Bloc Flutter 3 Dev"
-            applicationId "com.example.base_bloc_3.dev"
+            applicationId "com.example.base_bloc_practice.dev"
         }
         staging {
             dimension "app"
             resValue "string","app_name","Base Bloc Flutter 3 Stagin"
-            applicationId "com.example.base_bloc_3.staging"
+            applicationId "com.example.base_bloc_practice.staging"
         }
         production {
             dimension "app"
@@ -207,7 +207,7 @@ Change applicationId & App name in android/app/build.gradle
 ```
 
 ```
-    applicationId "com.example.base_bloc_3"
+    applicationId "com.example.base_bloc_practice"
 ```
 In IOS
 ------

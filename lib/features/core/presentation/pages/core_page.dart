@@ -1,4 +1,7 @@
 import 'package:base_bloc_3/features/core/presentation/bloc/core_bloc.dart';
+import 'package:base_bloc_3/features/order/presentation/pages/order_grid_view_page.dart';
+import 'package:base_bloc_3/features/order/presentation/pages/order_horizontal_list_view_page.dart';
+import 'package:base_bloc_3/features/order/presentation/pages/order_list_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../base/base_widget.dart';
 import '../../../../common/index.dart';
 import '../../../../routes/app_routes.dart';
-import '../../../example/presentation/pages/example_page.dart';
 
 class CorePage extends StatefulWidget {
   const CorePage({Key? key}) : super(key: key);
@@ -36,9 +38,9 @@ class _Screens extends StatelessWidget {
     return IndexedStack(
       index: index,
       children: const [
-        ExamplePage(),
-        DummyScreen(),
-        DummyScreen(),
+        OrderListViewPage(),
+        OrderGridViewPage(),
+        OrderHorizontalListViewPage(),
       ],
     );
   }
@@ -61,19 +63,19 @@ class _XBottomNavigationBar extends StatelessWidget {
       selectedFontSize: 12,
       items: [
         _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: Icon(Icons.add),
-          activeIcon: Icon(Icons.add),
+          label: 'Listview Page',
+          icon: const Icon(Icons.list_rounded),
+          activeIcon: const Icon(Icons.list_rounded),
         ),
         _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: Icon(Icons.add),
-          activeIcon: Icon(Icons.add),
+          label: 'GridView Page',
+          icon: const Icon(Icons.grid_3x3),
+          activeIcon: const Icon(Icons.grid_3x3),
         ),
         _buildBottomNavItem(
-          label: 'Trò chuyện',
-          icon: Icon(Icons.add),
-          activeIcon: Icon(Icons.add),
+          label: 'Horizontal Listview Page',
+          icon: const Icon(Icons.horizontal_distribute),
+          activeIcon: const Icon(Icons.horizontal_distribute),
         ),
       ],
       currentIndex: index,
