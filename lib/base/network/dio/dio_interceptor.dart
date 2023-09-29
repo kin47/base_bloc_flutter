@@ -12,8 +12,7 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    // ErrorHandling.withError(error: err);
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     super.onError(err, handler);
   }
 

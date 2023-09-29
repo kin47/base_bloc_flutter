@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:base_bloc_3/common/constants.dart';
 import 'package:base_bloc_3/common/notification/local_notification_helper.dart';
 import 'package:base_bloc_3/common/notification/push_notification_helper.dart';
@@ -44,7 +45,8 @@ Future<void> main() async {
         LocalizationConstants.viLocale
       ],
       path: LocalizationConstants.path,
-      fallbackLocale: LocalizationConstants.enUSLocale,
+      fallbackLocale: LocalizationConstants.viLocale,
+      startLocale: LocalizationConstants.viLocale,
       child: const MyApp(),
     ),
   );
@@ -67,6 +69,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
