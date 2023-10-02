@@ -6,7 +6,7 @@ import '../common/index.dart';
 import 'bloc/index.dart';
 
 abstract class BaseState<W extends StatefulWidget, E, S extends BaseBlocState,
-B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
+    B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
   late B bloc;
 
   B provideBloc(BuildContext context) {
@@ -18,9 +18,9 @@ B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
   }
 
   Widget blocBuilder(
-      Widget Function(BuildContext context, S state) builder, {
-        bool Function(S previous, S current)? buildWhen,
-      }) {
+    Widget Function(BuildContext context, S state) builder, {
+    bool Function(S previous, S current)? buildWhen,
+  }) {
     return BlocBuilder<B, S>(
       bloc: bloc,
       buildWhen: buildWhen,
@@ -100,10 +100,10 @@ B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
 }
 
 abstract class BaseShareState<
-W extends StatefulWidget,
-E,
-S extends BaseBlocState,
-B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
+    W extends StatefulWidget,
+    E,
+    S extends BaseBlocState,
+    B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
   late B bloc;
 
   B provideBloc(BuildContext context) {
@@ -136,9 +136,9 @@ B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
   }
 
   Widget blocBuilder(
-      Widget Function(BuildContext c, S) builder, [
-        bool Function(S, S)? buildWhen,
-      ]) {
+    Widget Function(BuildContext c, S) builder, [
+    bool Function(S, S)? buildWhen,
+  ]) {
     return BlocBuilder<B, S>(
       bloc: bloc,
       buildWhen: buildWhen,
@@ -196,15 +196,18 @@ B extends BaseBloc<E, S>> extends State<W> with BaseMethodMixin<S> {
 
 mixin BaseMethodMixin<S extends BaseBlocState> {
   void showMessage(
-      BuildContext context,
-      String message, {
-        type = SnackBarType.success,
-        int duration = Config.defaultDurationShowToast,
-      }) {
+    BuildContext context,
+    String message, {
+    type = SnackBarType.success,
+    int duration = Config.defaultDurationShowToast,
+  }) {
     final SnackBarHelper helper = getIt<SnackBarHelper>();
     switch (type) {
       case SnackBarType.error:
-        helper.showError(context, message,);
+        helper.showError(
+          context,
+          message,
+        );
         break;
       case SnackBarType.info:
         helper.showInfo(context, message);
