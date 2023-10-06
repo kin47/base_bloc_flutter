@@ -1,5 +1,7 @@
 import 'package:base_bloc_3/base/base_widget.dart';
+import 'package:base_bloc_3/base/bloc/bloc_status.dart';
 import 'package:base_bloc_3/common/index.dart';
+import 'package:base_bloc_3/common/widgets/shimmer_widget.dart';
 import 'package:base_bloc_3/features/order/presentation/bloc/order_bloc.dart';
 import 'package:base_bloc_3/features/order/widgets/bottom_sheet_option_button.dart';
 import 'package:base_bloc_3/features/order/widgets/order_list_view_item_widget.dart';
@@ -113,43 +115,9 @@ class _OrderListViewPageState
                           : _buildDropdownMenuWidget(context),
                       const SizedBox(height: 20),
                       Expanded(
-                        child: ListView.separated(
-                          padding: EdgeInsets.zero,
-                          separatorBuilder: (context, index) => const Divider(),
-                          itemBuilder: (context, index) {
-                            return Slidable(
-                              endActionPane: ActionPane(
-                                extentRatio: 0.25,
-                                motion: const ScrollMotion(),
-                                children: [
-                                  SlidableAction(
-                                    onPressed: (context) {},
-                                    backgroundColor: AppColors.red,
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.delete,
-                                    label: 'Delete',
-                                  ),
-                                ],
-                              ),
-                              child: OrderListViewItemWidget(
-                                imageUrl:
-                                    bloc.state.bubbleTeas[index].image ?? "",
-                                name: bloc.state.bubbleTeas[index].name ?? "",
-                                price: bloc.state.bubbleTeas[index].price ?? 0,
-                                isBestSeller:
-                                    bloc.state.bubbleTeas[index].bestSeller ??
-                                        false,
-                                onAddItem: () {
-                                  setState(() {
-                                    totalPrice += bloc.state.bubbleTeas[index].price ?? 0;
-                                    numberOfCartItem++;
-                                  });
-                                },
-                              ),
-                            );
-                          },
-                          itemCount: bloc.state.bubbleTeas.length,
-                        ),
+                        child: state.status == BaseStateStatus.loading
+                            ? _buildShimmer()
+                            : _buildListView(),
                       ),
                     ],
                   ),
@@ -162,6 +130,77 @@ class _OrderListViewPageState
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildShimmer() {
+    return ListView.separated(
+      separatorBuilder: (context, index) {
+        return const SizedBox(height: 10);
+      },
+      itemBuilder: (context, index) {
+        return const Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ShimmerWidget.rectangular(
+              height: 100,
+              width: 100,
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                children: [
+                  ShimmerWidget.rectangular(
+                    height: 18,
+                  ),
+                  SizedBox(height: 10),
+                  ShimmerWidget.rectangular(
+                    height: 14,
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+      itemCount: 5,
+    );
+  }
+
+  Widget _buildListView() {
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      separatorBuilder: (context, index) => const Divider(),
+      itemBuilder: (context, index) {
+        return Slidable(
+          endActionPane: ActionPane(
+            extentRatio: 0.25,
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: (context) {},
+                backgroundColor: AppColors.red,
+                foregroundColor: Colors.white,
+                icon: Icons.delete,
+                label: 'Delete',
+              ),
+            ],
+          ),
+          child: OrderListViewItemWidget(
+            imageUrl: bloc.state.bubbleTeas[index].image ?? "",
+            name: bloc.state.bubbleTeas[index].name ?? "",
+            price: bloc.state.bubbleTeas[index].price ?? 0,
+            isBestSeller: bloc.state.bubbleTeas[index].bestSeller ?? false,
+            onAddItem: () {
+              setState(() {
+                totalPrice += bloc.state.bubbleTeas[index].price ?? 0;
+                numberOfCartItem++;
+              });
+            },
+          ),
+        );
+      },
+      itemCount: bloc.state.bubbleTeas.length,
     );
   }
 
