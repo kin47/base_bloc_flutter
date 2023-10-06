@@ -19,8 +19,6 @@ migrate_working_dir/
 #Generated files
 *.lock
 *.config.dart
-*.g.dart
-*.freezed.dart
 *.gr.dart
 
 # The .vscode folder contains launch configuration and tasks you configure in
