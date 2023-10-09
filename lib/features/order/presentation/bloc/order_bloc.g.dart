@@ -17,6 +17,8 @@ abstract class _$OrderStateCWProxy {
 
   OrderState displaySearch(bool displaySearch);
 
+  OrderState isLoading(bool isLoading);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `OrderState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -29,6 +31,7 @@ abstract class _$OrderStateCWProxy {
     List<BubbleTeaEntity>? bubbleTeas,
     String? searchKey,
     bool? displaySearch,
+    bool? isLoading,
   });
 }
 
@@ -56,6 +59,9 @@ class _$OrderStateCWProxyImpl implements _$OrderStateCWProxy {
       this(displaySearch: displaySearch);
 
   @override
+  OrderState isLoading(bool isLoading) => this(isLoading: isLoading);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `OrderState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -69,6 +75,7 @@ class _$OrderStateCWProxyImpl implements _$OrderStateCWProxy {
     Object? bubbleTeas = const $CopyWithPlaceholder(),
     Object? searchKey = const $CopyWithPlaceholder(),
     Object? displaySearch = const $CopyWithPlaceholder(),
+    Object? isLoading = const $CopyWithPlaceholder(),
   }) {
     return OrderState(
       status: status == const $CopyWithPlaceholder() || status == null
@@ -93,6 +100,10 @@ class _$OrderStateCWProxyImpl implements _$OrderStateCWProxy {
               ? _value.displaySearch
               // ignore: cast_nullable_to_non_nullable
               : displaySearch as bool,
+      isLoading: isLoading == const $CopyWithPlaceholder() || isLoading == null
+          ? _value.isLoading
+          // ignore: cast_nullable_to_non_nullable
+          : isLoading as bool,
     );
   }
 }

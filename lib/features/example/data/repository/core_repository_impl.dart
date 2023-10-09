@@ -25,7 +25,7 @@ class ExampleRepoImpl implements ExampleRepo {
         offset: offset,
       );
       return right(result.data ?? []);
-    } on DioError catch (exception) {
+    } on DioException catch (exception) {
       return left(exception.baseError);
     }
   }

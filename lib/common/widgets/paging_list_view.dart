@@ -41,7 +41,7 @@ class CustomSliverListView<T> extends StatelessWidget {
         itemBuilder: builder,
         noItemsFoundIndicatorBuilder: (_) => emptyWidget ?? const EmptyWidget(),
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             Container(
               color: loadingBackgroundColor ?? Colors.transparent,
               height: 200,
@@ -105,7 +105,7 @@ class CustomListView<T> extends StatelessWidget {
         itemBuilder: builder,
         noItemsFoundIndicatorBuilder: (_) => emptyWidget,
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             const SizedBox(
               height: 200,
               child: Center(
@@ -161,7 +161,7 @@ class CustomSliverListViewSeparated<T> extends StatelessWidget {
         itemBuilder: builder,
         noItemsFoundIndicatorBuilder: (_) => emptyWidget ?? const EmptyWidget(),
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             Container(
               color: loadingBackgroundColor ?? Colors.transparent,
               height: 200,
@@ -229,22 +229,24 @@ class CustomListViewSeparated<T> extends StatelessWidget {
         itemBuilder: builder,
         noItemsFoundIndicatorBuilder: (_) => emptyWidget,
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             const SizedBox(
               height: 200,
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             ),
-        firstPageErrorIndicatorBuilder: (_) => firstPageErrorIndicator ?? Column(
-          children: [
-            Text(controller.error),
-            ElevatedButton(
-              onPressed: onRefresh ?? () => controller.refresh(),
-              child: const Text('Click to reload'),
-            )
-          ],
-        ),
+        firstPageErrorIndicatorBuilder: (_) =>
+            firstPageErrorIndicator ??
+            Column(
+              children: [
+                Text(controller.error),
+                ElevatedButton(
+                  onPressed: onRefresh ?? () => controller.refresh(),
+                  child: const Text('Click to reload'),
+                )
+              ],
+            ),
         newPageProgressIndicatorBuilder: (_) {
           if (newPageProgressIndicatorBuilder != null) {
             return newPageProgressIndicatorBuilder!;
@@ -260,9 +262,9 @@ class CustomListViewSeparated<T> extends StatelessWidget {
         newPageErrorIndicatorBuilder: (_) => InkWell(
           onTap: controller.retryLastFailedRequest,
           child: newPageErrorIndicatorBuilder ??
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Bấm để tải lại',
                     textAlign: TextAlign.center,
@@ -321,7 +323,7 @@ class CustomSliverGridView<T> extends StatelessWidget {
       pagingController: controller,
       shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
       showNewPageProgressIndicatorAsGridChild:
-      showNewPageProgressIndicatorAsGridChild ?? true,
+          showNewPageProgressIndicatorAsGridChild ?? true,
       builderDelegate: PagedChildBuilderDelegate<T>(
         itemBuilder: builder,
         newPageProgressIndicatorBuilder: (_) => Center(
@@ -330,7 +332,7 @@ class CustomSliverGridView<T> extends StatelessWidget {
         ),
         noItemsFoundIndicatorBuilder: (_) => emptyWidget ?? const EmptyWidget(),
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             Container(
               color: loadingBackgroundColor ?? Colors.transparent,
               height: 200,
@@ -341,7 +343,7 @@ class CustomSliverGridView<T> extends StatelessWidget {
               ),
             ),
         firstPageErrorIndicatorBuilder: (_) =>
-        firstPageErrorIndicatorBuilder ??
+            firstPageErrorIndicatorBuilder ??
             Column(
               children: [
                 Text(controller.error),
@@ -354,9 +356,9 @@ class CustomSliverGridView<T> extends StatelessWidget {
         newPageErrorIndicatorBuilder: (_) => InkWell(
           onTap: controller.retryLastFailedRequest,
           child: newPageErrorIndicatorBuilder ??
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Bấm để tải lại',
                     textAlign: TextAlign.center,
@@ -409,7 +411,7 @@ class CustomGridView<T> extends StatelessWidget {
         itemBuilder: builder,
         noItemsFoundIndicatorBuilder: (_) => emptyWidget ?? const EmptyWidget(),
         firstPageProgressIndicatorBuilder: (_) =>
-        firstPageProgressIndicator ??
+            firstPageProgressIndicator ??
             Container(
               color: loadingBackgroundColor ?? Colors.transparent,
               height: 200,

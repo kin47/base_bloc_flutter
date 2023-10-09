@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../constants/constants.dart';
-import 'error.dart';
 
 extension DioErrorMessage on DioException {
   BaseError get baseError {

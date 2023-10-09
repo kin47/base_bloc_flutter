@@ -29,7 +29,7 @@ class LogUtils {
   }
 
   void logV(String text) {
-    if (showLog) _logger.v(text);
+    if (showLog) _logger.t(text);
   }
 
   void logD(String text) {
@@ -49,6 +49,6 @@ class LogUtils {
   }
 
   void logWtf(String text) {
-    if (showLog) _logger.wtf(text);
+    if (showLog) _logger.f(text);
   }
 }

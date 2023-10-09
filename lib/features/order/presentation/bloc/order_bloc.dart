@@ -29,25 +29,25 @@ class OrderBloc extends BaseBloc<OrderEvent, OrderState> {
   final OrderUseCase _useCase;
 
   Future onGetData(Emitter<OrderState> emit) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(state.copyWith(isLoading: true));
     final result = await _useCase.getData();
     result.fold(
-      (l) => emit(
-          state.copyWith(status: BaseStateStatus.failed, message: "Error")),
-      (r) =>
-          emit(state.copyWith(status: BaseStateStatus.success, bubbleTeas: r)),
+      (l) => emit(state.copyWith(
+          status: BaseStateStatus.failed, message: "Error", isLoading: false)),
+      (r) => emit(state.copyWith(
+          status: BaseStateStatus.success, bubbleTeas: r, isLoading: false)),
     );
   }
 
   Future onGetBubbleTeas(
       Emitter<OrderState> emit, List<BubbleTea> bubbleTeas, int offset) async {
-    emit(state.copyWith(status: BaseStateStatus.loading));
+    emit(state.copyWith(isLoading: true));
     final result = await _useCase.getData();
     result.fold(
-      (l) => emit(
-          state.copyWith(status: BaseStateStatus.failed, message: "Error")),
-      (r) =>
-          emit(state.copyWith(status: BaseStateStatus.success, bubbleTeas: r)),
+      (l) => emit(state.copyWith(
+          status: BaseStateStatus.failed, message: "Error", isLoading: false)),
+      (r) => emit(state.copyWith(
+          status: BaseStateStatus.success, bubbleTeas: r, isLoading: false)),
     );
   }
 
