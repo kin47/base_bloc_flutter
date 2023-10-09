@@ -9,7 +9,7 @@ class ErrorHandling implements Exception {
   final Dio dio = getIt<Dio>();
 
   ErrorHandling.withError({
-    required DioError error,
+    required DioException error,
   }) {
     _handleError(error);
   }
@@ -51,7 +51,7 @@ class ErrorHandling implements Exception {
     return errorMessage;
   }
 
-  Future<void> refreshToken(DioError error) async {
+  Future<void> refreshToken(DioException error) async {
     error.requestOptions.cancelToken?.cancel();
     String token = "";
     //get new Token

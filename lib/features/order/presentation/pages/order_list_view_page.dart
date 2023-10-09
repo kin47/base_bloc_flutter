@@ -1,5 +1,4 @@
 import 'package:base_bloc_3/base/base_widget.dart';
-import 'package:base_bloc_3/base/bloc/bloc_status.dart';
 import 'package:base_bloc_3/common/index.dart';
 import 'package:base_bloc_3/common/widgets/shimmer_widget.dart';
 import 'package:base_bloc_3/features/order/presentation/bloc/order_bloc.dart';
@@ -115,7 +114,7 @@ class _OrderListViewPageState
                           : _buildDropdownMenuWidget(context),
                       const SizedBox(height: 20),
                       Expanded(
-                        child: state.status == BaseStateStatus.loading
+                        child: state.isLoading == true
                             ? _buildShimmer()
                             : _buildListView(),
                       ),
