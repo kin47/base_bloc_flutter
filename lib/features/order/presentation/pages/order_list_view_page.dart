@@ -1,5 +1,6 @@
 import 'package:base_bloc_3/base/base_widget.dart';
 import 'package:base_bloc_3/common/index.dart';
+import 'package:base_bloc_3/features/order/domain/entity/bubble_tea_entity.dart';
 import 'package:base_bloc_3/features/order/presentation/bloc/order_bloc.dart';
 import 'package:base_bloc_3/features/order/widgets/bottom_sheet_option_button.dart';
 import 'package:base_bloc_3/features/order/widgets/order_list_view_item_widget.dart';
@@ -44,7 +45,14 @@ class _OrderListViewPageState
   @override
   void initState() {
     super.initState();
-    bloc.add(const OrderEvent.getData());
+    bloc.pagingController.addPageRequestListener((int pageKey) {
+      bloc.add(
+        OrderEvent.getBubbleTeas(
+          bubbleTeas: bloc.state.bubbleTeas,
+          offset: pageKey + 30,
+        ),
+      );
+    });
   }
 
   void _displayModalBottomSheet(BuildContext context) {
@@ -113,10 +121,12 @@ class _OrderListViewPageState
                           : _buildDropdownMenuWidget(context),
                       const SizedBox(height: 20),
                       Expanded(
-                        child: ListView.separated(
+                        child: CustomListViewSeparated<BubbleTeaEntity>(
                           padding: EdgeInsets.zero,
                           separatorBuilder: (context, index) => const Divider(),
-                          itemBuilder: (context, index) {
+                          controller: bloc.pagingController,
+                          builder: (BuildContext context, BubbleTeaEntity item,
+                              int index) {
                             return Slidable(
                               endActionPane: ActionPane(
                                 extentRatio: 0.25,
@@ -132,23 +142,19 @@ class _OrderListViewPageState
                                 ],
                               ),
                               child: OrderListViewItemWidget(
-                                imageUrl:
-                                    bloc.state.bubbleTeas[index].image ?? "",
-                                name: bloc.state.bubbleTeas[index].name ?? "",
-                                price: bloc.state.bubbleTeas[index].price ?? 0,
-                                isBestSeller:
-                                    bloc.state.bubbleTeas[index].bestSeller ??
-                                        false,
+                                imageUrl: item.image ?? "",
+                                name: item.name ?? "",
+                                price: item.price ?? 0,
+                                isBestSeller: item.bestSeller ?? false,
                                 onAddItem: () {
                                   setState(() {
-                                    totalPrice += bloc.state.bubbleTeas[index].price ?? 0;
+                                    totalPrice += item.price ?? 0;
                                     numberOfCartItem++;
                                   });
                                 },
                               ),
                             );
                           },
-                          itemCount: bloc.state.bubbleTeas.length,
                         ),
                       ),
                     ],

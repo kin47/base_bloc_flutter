@@ -20,10 +20,15 @@ BubbleTea _$BubbleTeaFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BubbleTea {
+  @JsonKey(name: "login")
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "url")
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "avatar_url")
   String? get image => throw _privateConstructorUsedError;
+  @JsonKey(name: "id")
   int? get price => throw _privateConstructorUsedError;
+  @JsonKey(name: "site_admin")
   bool? get bestSeller => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,11 +43,11 @@ abstract class $BubbleTeaCopyWith<$Res> {
       _$BubbleTeaCopyWithImpl<$Res, BubbleTea>;
   @useResult
   $Res call(
-      {String? name,
-      String? description,
-      String? image,
-      int? price,
-      bool? bestSeller});
+      {@JsonKey(name: "login") String? name,
+      @JsonKey(name: "url") String? description,
+      @JsonKey(name: "avatar_url") String? image,
+      @JsonKey(name: "id") int? price,
+      @JsonKey(name: "site_admin") bool? bestSeller});
 }
 
 /// @nodoc
@@ -97,11 +102,11 @@ abstract class _$$_BubbleTeaCopyWith<$Res> implements $BubbleTeaCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? name,
-      String? description,
-      String? image,
-      int? price,
-      bool? bestSeller});
+      {@JsonKey(name: "login") String? name,
+      @JsonKey(name: "url") String? description,
+      @JsonKey(name: "avatar_url") String? image,
+      @JsonKey(name: "id") int? price,
+      @JsonKey(name: "site_admin") bool? bestSeller});
 }
 
 /// @nodoc
@@ -150,20 +155,29 @@ class __$$_BubbleTeaCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BubbleTea implements _BubbleTea {
   const _$_BubbleTea(
-      {this.name, this.description, this.image, this.price, this.bestSeller});
+      {@JsonKey(name: "login") this.name,
+      @JsonKey(name: "url") this.description,
+      @JsonKey(name: "avatar_url") this.image,
+      @JsonKey(name: "id") this.price,
+      @JsonKey(name: "site_admin") this.bestSeller});
 
   factory _$_BubbleTea.fromJson(Map<String, dynamic> json) =>
       _$$_BubbleTeaFromJson(json);
 
   @override
+  @JsonKey(name: "login")
   final String? name;
   @override
+  @JsonKey(name: "url")
   final String? description;
   @override
+  @JsonKey(name: "avatar_url")
   final String? image;
   @override
+  @JsonKey(name: "id")
   final int? price;
   @override
+  @JsonKey(name: "site_admin")
   final bool? bestSeller;
 
   @override
@@ -206,24 +220,29 @@ class _$_BubbleTea implements _BubbleTea {
 
 abstract class _BubbleTea implements BubbleTea {
   const factory _BubbleTea(
-      {final String? name,
-      final String? description,
-      final String? image,
-      final int? price,
-      final bool? bestSeller}) = _$_BubbleTea;
+      {@JsonKey(name: "login") final String? name,
+      @JsonKey(name: "url") final String? description,
+      @JsonKey(name: "avatar_url") final String? image,
+      @JsonKey(name: "id") final int? price,
+      @JsonKey(name: "site_admin") final bool? bestSeller}) = _$_BubbleTea;
 
   factory _BubbleTea.fromJson(Map<String, dynamic> json) =
       _$_BubbleTea.fromJson;
 
   @override
+  @JsonKey(name: "login")
   String? get name;
   @override
+  @JsonKey(name: "url")
   String? get description;
   @override
+  @JsonKey(name: "avatar_url")
   String? get image;
   @override
+  @JsonKey(name: "id")
   int? get price;
   @override
+  @JsonKey(name: "site_admin")
   bool? get bestSeller;
   @override
   @JsonKey(ignore: true)

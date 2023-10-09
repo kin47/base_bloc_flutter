@@ -12,7 +12,9 @@ class OrderUseCaseImpl implements OrderUseCase {
   final OrderRepository _repository;
 
   @override
-  Future<Either<BaseError, List<BubbleTeaEntity>>> getData() async {
-    return _repository.getData();
+  Future<Either<BaseError, List<BubbleTeaEntity>>> getData({
+    required int offset,
+  }) async {
+    return _repository.getData(offset: offset);
   }
 }

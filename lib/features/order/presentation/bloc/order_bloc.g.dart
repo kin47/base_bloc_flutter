@@ -11,7 +11,7 @@ abstract class _$OrderStateCWProxy {
 
   OrderState message(String? message);
 
-  OrderState bubbleTeas(List<BubbleTeaEntity> bubbleTeas);
+  OrderState bubbleTeas(List<BubbleTea> bubbleTeas);
 
   OrderState searchKey(String searchKey);
 
@@ -26,7 +26,7 @@ abstract class _$OrderStateCWProxy {
   OrderState call({
     BaseStateStatus? status,
     String? message,
-    List<BubbleTeaEntity>? bubbleTeas,
+    List<BubbleTea>? bubbleTeas,
     String? searchKey,
     bool? displaySearch,
   });
@@ -45,7 +45,7 @@ class _$OrderStateCWProxyImpl implements _$OrderStateCWProxy {
   OrderState message(String? message) => this(message: message);
 
   @override
-  OrderState bubbleTeas(List<BubbleTeaEntity> bubbleTeas) =>
+  OrderState bubbleTeas(List<BubbleTea> bubbleTeas) =>
       this(bubbleTeas: bubbleTeas);
 
   @override
@@ -83,7 +83,7 @@ class _$OrderStateCWProxyImpl implements _$OrderStateCWProxy {
           bubbleTeas == const $CopyWithPlaceholder() || bubbleTeas == null
               ? _value.bubbleTeas
               // ignore: cast_nullable_to_non_nullable
-              : bubbleTeas as List<BubbleTeaEntity>,
+              : bubbleTeas as List<BubbleTea>,
       searchKey: searchKey == const $CopyWithPlaceholder() || searchKey == null
           ? _value.searchKey
           // ignore: cast_nullable_to_non_nullable

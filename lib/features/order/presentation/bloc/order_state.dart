@@ -2,7 +2,7 @@ part of 'order_bloc.dart';
 
 @CopyWith()
 class OrderState extends BaseBlocState {
-  final List<BubbleTeaEntity> bubbleTeas;
+  final List<BubbleTea> bubbleTeas;
   final String searchKey;
   final bool displaySearch;
 

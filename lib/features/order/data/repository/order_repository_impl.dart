@@ -14,9 +14,11 @@ class OrderRepositoryImpl implements OrderRepository {
   final OrderDataSource _dataSource;
 
   @override
-  Future<Either<BaseError, List<BubbleTeaEntity>>> getData() async {
+  Future<Either<BaseError, List<BubbleTeaEntity>>> getData({
+    required int offset,
+  }) async {
     try {
-      final result = await _dataSource.getData();
+      final result = await _dataSource.getData(offset: offset);
       return right(result);
     } on DioException catch (exception) {
       return left(exception.baseError);
