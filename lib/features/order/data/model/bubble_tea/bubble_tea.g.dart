@@ -7,18 +7,18 @@ part of 'bubble_tea.dart';
 // **************************************************************************
 
 _$_BubbleTea _$$_BubbleTeaFromJson(Map<String, dynamic> json) => _$_BubbleTea(
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      image: json['image'] as String?,
-      price: json['price'] as int?,
-      bestSeller: json['bestSeller'] as bool?,
+      name: json['login'] as String?,
+      description: json['url'] as String?,
+      image: json['avatar_url'] as String?,
+      price: json['id'] as int?,
+      bestSeller: json['site_admin'] as bool?,
     );
 
 Map<String, dynamic> _$$_BubbleTeaToJson(_$_BubbleTea instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'description': instance.description,
-      'image': instance.image,
-      'price': instance.price,
-      'bestSeller': instance.bestSeller,
+      'login': instance.name,
+      'url': instance.description,
+      'avatar_url': instance.image,
+      'id': instance.price,
+      'site_admin': instance.bestSeller,
     };

@@ -27,7 +27,14 @@ class _OrderGridViewPageState
   @override
   void initState() {
     super.initState();
-    bloc.add(const OrderEvent.getData());
+    bloc.pagingController.addPageRequestListener((pageKey) {
+      bloc.add(
+        OrderEvent.getBubbleTeas(
+          bubbleTeas: bloc.state.bubbleTeas,
+          offset: pageKey,
+        ),
+      );
+    });
   }
 
   @override
@@ -61,11 +68,12 @@ class _OrderGridViewPageState
                   Expanded(
                     child: GridView.builder(
                       padding: EdgeInsets.zero,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
-                        childAspectRatio: 2/3,
+                        childAspectRatio: 2 / 3,
                       ),
                       itemCount: bloc.state.bubbleTeas.length,
                       itemBuilder: (context, index) {
@@ -73,7 +81,8 @@ class _OrderGridViewPageState
                           imageUrl: bloc.state.bubbleTeas[index].image ?? "",
                           name: bloc.state.bubbleTeas[index].name ?? "",
                           price: bloc.state.bubbleTeas[index].price ?? 0,
-                          isBestSeller: bloc.state.bubbleTeas[index].bestSeller ?? false,
+                          isBestSeller:
+                              bloc.state.bubbleTeas[index].bestSeller ?? false,
                         );
                       },
                     ),

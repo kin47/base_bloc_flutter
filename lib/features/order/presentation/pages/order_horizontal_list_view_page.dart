@@ -6,6 +6,7 @@ import 'package:base_bloc_3/features/order/widgets/order_list_view_item_widget.d
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderHorizontalListViewPage extends StatefulWidget {
   const OrderHorizontalListViewPage({super.key});
@@ -28,7 +29,14 @@ class _OrderHorizontalListViewPageState extends BaseState<
   @override
   void initState() {
     super.initState();
-    bloc.add(const OrderEvent.getData());
+    bloc.pagingController.addPageRequestListener((pageKey) {
+      bloc.add(
+        OrderEvent.getBubbleTeas(
+          bubbleTeas: bloc.state.bubbleTeas,
+          offset: pageKey,
+        ),
+      );
+    });
   }
 
   @override
@@ -41,7 +49,7 @@ class _OrderHorizontalListViewPageState extends BaseState<
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 24, bottom: 10),
+                  padding: EdgeInsets.only(left: 24.w, bottom: 10.h),
                   child: Text(
                     'deal_today'.tr(),
                     style: AppStyles.s20w600.copyWith(
